@@ -1,7 +1,9 @@
-import { source } from '@/lib/source';
-import { createFromSource } from 'fumadocs-core/search/server';
+import { Charset } from "flexsearch";
+import { flexsearchFromSource } from "fumadocs-core/search/flexsearch";
+import { source } from "@/lib/source";
 
-export const { GET } = createFromSource(source, {
-  // https://docs.orama.com/docs/orama-js/supported-languages
-  language: 'english',
+export const { staticGET: GET } = flexsearchFromSource(source, {
+  document: {
+    encoder: Charset.CJK,
+  },
 });
