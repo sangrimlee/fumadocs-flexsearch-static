@@ -1,10 +1,12 @@
 import { ImageResponse } from "@takumi-rs/image-response";
 import { generate as DefaultImage } from "fumadocs-ui/og/takumi";
 import { notFound } from "next/navigation";
+import { getFont } from "@/lib/fonts";
 import { getPageImage, source } from "@/lib/source";
 
-export const revalidate = false;
+const pretendard = await getFont("pretendard.woff2");
 
+export const revalidate = false;
 export async function GET(
   _req: Request,
   { params }: RouteContext<"/[lang]/og/docs/[...slug]">,
@@ -23,6 +25,12 @@ export async function GET(
       width: 1200,
       height: 630,
       format: "webp",
+      fonts: [
+        {
+          name: "Pretendard Variable",
+          data: pretendard,
+        },
+      ],
     },
   );
 }
