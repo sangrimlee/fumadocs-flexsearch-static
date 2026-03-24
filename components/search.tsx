@@ -1,4 +1,5 @@
 "use client";
+
 import { useDocsSearch } from "fumadocs-core/search/client";
 import { flexsearchStaticClient } from "fumadocs-core/search/client/flexsearch-static";
 import {
@@ -12,10 +13,14 @@ import {
   SearchDialogOverlay,
   type SharedProps,
 } from "fumadocs-ui/components/dialog/search";
+import { useI18n } from "fumadocs-ui/contexts/i18n";
 
 export default function DefaultSearchDialog(props: SharedProps) {
+  const { locale } = useI18n();
   const { search, setSearch, query } = useDocsSearch({
-    client: flexsearchStaticClient(),
+    client: flexsearchStaticClient({
+      locale,
+    }),
   });
 
   return (
